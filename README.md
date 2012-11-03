@@ -1,3 +1,6 @@
+### Fork Changes
+1. make STI support more better, [see issue](https://github.com/twitter/activerecord-reputation-system/issues/14)
+
 ## ActiveRecord Reputation System  [![Build Status](https://secure.travis-ci.org/twitter/activerecord-reputation-system.png)](http://travis-ci.org/twitter/activerecord-reputation-system) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/twitter/activerecord-reputation-system)
 
 The Active Record Reputation System helps you build the reputation system for your Rails application. It allows Active Record to have reputations and get evaluated by other records. This gem allows you to:

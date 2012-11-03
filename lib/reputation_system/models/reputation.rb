@@ -146,6 +146,11 @@ module ReputationSystem
         srn = ReputationSystem::Network.get_scoped_reputation_name(target.class.name, reputation_name, scope)
         process = ReputationSystem::Network.get_reputation_def(target.class.name, srn)[:aggregated_by]
         receiver = find_by_reputation_name_and_target(srn, target)
+        # add more better support for STI
+        if sender.target.respond_to? :descends_from_active_record?
+          asso_names = ReputationSystem::Network.get_reputation_def(target.class.name, srn)[:source].map {|r| r[:of]}
+        return nil unless asso_names.map {|a| target.send(a).build.class.name }.include? sender.target.class.name
+        end
         if receiver
           weight = ReputationSystem::Network.get_weight_of_source_from_reputation_name_of_target(target, sender.reputation_name, srn)
           update_reputation_value(receiver, sender, weight, process, oldValue)
