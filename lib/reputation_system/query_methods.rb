@@ -21,8 +21,10 @@ module ReputationSystem
     end
 
     module ClassMethods
+      # I think it's a useful scope method to build more complex query in real world,
+      # find_with_reputation return array and can't replace with_reputation,
+      # So it should not be removed and I remove the noise deprecation warn to cleanup server log
       def with_reputation(*args)
-        warn "[DEPRECATION] `with_reputation` will be deprecated in version 3.0.0. Please use finder methods instead."
         reputation_name, srn = parse_arel_query_args(args)
         select = build_select_statement(table_name, reputation_name)
         joins = build_join_statement(table_name, name, srn)
